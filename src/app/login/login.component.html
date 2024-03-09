@@ -1,0 +1,55 @@
+<section class="container">
+  <header>Login</header>
+
+  <form class="form" [formGroup]="reactiveForm" (ngSubmit)="Onlogin()">
+    <div class="input-box">
+      <input type="text" placeholder="Username" formControlName="username" />
+      <small
+        *ngIf="
+            reactiveForm.get('username').errors?.['required'] &&
+            reactiveForm.get('username').touched
+          "
+        >*Username is required</small
+      >
+
+      <small
+        *ngIf="
+            reactiveForm.get('username').errors?.['noSpaceAllowed'] &&
+            reactiveForm.get('username').touched
+          "
+        >*No Space is allowed</small
+      >
+    </div>
+    <div class="input-box">
+      <input
+        type="password"
+        placeholder="Password"
+        formControlName="password"
+      />
+      <small
+        *ngIf="
+            reactiveForm.get('password').errors?.['required'] &&
+            reactiveForm.get('password').touched
+          "
+        >*Password is required</small
+      >
+      <small
+        *ngIf="
+            reactiveForm.get('password').errors?.['noSpaceAllowed'] &&
+            reactiveForm.get('password').touched
+          "
+        >*No Space is allowed</small
+      >
+    </div>
+    <input
+      type="submit"
+      value="Login"
+      class="submit-btn"
+      [disabled]="!reactiveForm.valid"
+    />
+    <div class="error-message" *ngIf="invalidLogin">
+      Invalid username or password.
+    </div>
+    <!-- [disabled]="!reactiveForm.valid" -->
+  </form>
+</section>
